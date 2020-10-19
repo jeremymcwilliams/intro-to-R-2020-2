@@ -1,0 +1,154 @@
+---
+title: "Intro to R, fall 2020, part 2"
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document:
+    df_print: paged
+---
+
+# Intro to R workshop, part 2
+
+### Watzek Library Digital Initiatives
+### October 19th, 2020
+
+
+### Goals of this workshop:
+
+* Filter column data based upon some condition
+* Perform t test
+* Intro to visualizations
+
+
+First, let's load the tidyverse, so we can have access to functions needed for the rest of these exercises:
+
+```{r}
+library(tidyverse)
+
+```
+
+
+Now let's load the class's dataset, which is available in the files section:
+
+```{r}
+
+orbData<-read_csv("orb20.csv")
+
+
+#print it out
+
+orbData
+```
+
+
+
+Creating a boxplot
+
+You can create a boxplot in R from a dataset, with the following arguments:
+
+* y ~ group : "y" is the column that appears on the y-axis, and the "group" refers to grouped data within a column
+* data=dataset : identify which tibble/dataframe/dataset you're using
+* main="My title" : text above the boxplot
+* xlab="Label on x axis"
+* ylab="Label on y axis
+
+
+Let's say we we're interested in whether heavier spiders tend to have damaged webs. We can start by creating a boxplot:
+
+
+```{r}
+
+
+boxplot(`weight (g)`~`orb intact?`, data=orbData, main="Comparison of spider weights", xlab="Was orb intact?", ylab="Average weight in grams")
+
+
+
+```
+
+
+
+YOUR TURN:
+You're curious about whether spiders near human structures tend to be larger or smaller. Create a boxplot showing these two variables (hint: use columns "near human structure?" and "length (mm)"):
+
+```{r}
+
+
+
+
+
+```
+
+
+
+
+Now, getting back to the comparison of spider weights in damaged vs. undamaged webs: in addition to creating a data visualization, we want to perform a statistical analysis using a t-test. 
+
+Performing a t-test in R is pretty easy, but the trick is to get our data in order. In this case, we need an array of weights for the spiders with damaged webs, and an array of weights for the spiders with undamaged webs. There are a few ways to do this, but we'll use this strategy:
+
+
+* Create a subset of the tibbles for each condition (damaged, undamaged)
+* Use the "$" to create our arrays
+
+We'll create our subsets using the "filter" function:
+
+```{r}
+#The filter function takes two main arguments:
+#The first is which data set/tibble are you referring to
+#The second is the criteria we're filtering on. We use "==" b/c we're comparing the two values (not assigning a value, as with "=")
+
+intact<-filter(orbData, orbData$`orb intact?`=="Yes")
+
+intact
+
+damaged<-filter(orbData, orbData$`orb intact?`=="No")
+
+damaged
+
+
+
+
+```
+
+
+
+We now have two subsets of data, so for each we can get the weight values as arrays/vectors:
+
+```{r}
+
+#as a short cut, we'll include the na.omit function as part of it:
+
+intactWts<-na.omit(intact$`weight (g)`)
+
+damagedWts<-na.omit(damaged$`weight (g)`)
+
+intactWts
+
+damagedWts
+
+
+
+
+```
+
+
+The t-test function takes two arguements: the first array, and the second array
+
+```{r}
+
+t.test(intactWts, damagedWts)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
