@@ -175,7 +175,7 @@ abline(wlLM)
 
 #To see the statistical outputs from the linear regression, use the "summary" function:
 
-summary(lwLM)
+summary(wlLM)
 
 ```
 
