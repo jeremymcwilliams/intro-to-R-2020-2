@@ -86,8 +86,8 @@ Now, getting back to the comparison of spider weights in damaged vs. undamaged w
 Performing a t-test in R is pretty easy, but the trick is to get our data in order. In this case, we need an array of weights for the spiders with damaged webs, and an array of weights for the spiders with undamaged webs. There are a few ways to do this, but we'll use this strategy:
 
 
-* Create a subset of the tibbles for each condition (damaged, undamaged)
-* Use the "$" to create our arrays
+* Create a subset of the tibbles for each condition (damaged, undamaged). These "subsets" are just tibbles meeting each criteria
+* Use the "$" to  target a column to create our arrays
 
 We'll create our subsets using the "filter" function:
 
