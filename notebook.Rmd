@@ -145,6 +145,45 @@ t.test(intactWts, damagedWts)
 
 
 
+More plots
+
+Scatterplot with regression line
+
+Steps:
+* define your data columns from the data set
+* use the "plot" function and "~" to plot the two columns. Optionally add descriptors, using "main", "xlab", "ylab".
+* create a "linear model" with the lm function, again using the "~" to associate the data columns. This generates the y-intercept and slope.
+* run the "abline" function on the linear model - this adds the line to the plot
+
+
+
+```{r}
+#In this example, we're going to create a scatterplot and linear regression line, looking at the association of spider weight and spider length: 
+
+#define data columns:
+spWeight<-orbData$`weight (g)`
+spLength<-orbData$`length (mm)`
+
+#set up the plot. First column is the y-axis.
+plot(spLength~spWeight, main="My title", xlab="Weight (g)", ylab="Length (mm)")
+
+#create linear model:
+lwLM<-lm(spLength~spWeight)
+
+#add the line the to plot:
+abline(lwLM)
+
+#if you want to see the y-intercept and slope values, print the linear model:
+lwLM
+
+```
+
+
+
+
+
+
+
 
 
 
