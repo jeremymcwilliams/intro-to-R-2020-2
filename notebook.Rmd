@@ -165,16 +165,17 @@ spWeight<-orbData$`weight (g)`
 spLength<-orbData$`length (mm)`
 
 #set up the plot. First column is the y-axis.
-plot(spLength~spWeight, main="My title", xlab="Weight (g)", ylab="Length (mm)")
+plot(spWeight~spLength, main="My title", xlab="Length (mm)", ylab="Weight (g)")
 
 #create linear model:
-lwLM<-lm(spLength~spWeight)
+wlLM<-lm(spWeight~spLength)
 
 #add the line the to plot:
-abline(lwLM)
+abline(wlLM)
 
-#if you want to see the y-intercept and slope values, print the linear model:
-lwLM
+#To see the statistical outputs from the linear regression, use the "summary" function:
+
+summary(lwLM)
 
 ```
 
@@ -182,7 +183,20 @@ lwLM
 
 
 
+Pie charts
 
+For pie charts, you basically need an array of values, a corresponding array of labels, and a title:
+
+```{r}
+myData<-c(10, 20, 30, 40)
+myLabels<-c("measure 1", "measure 2", "measure 3", "measure 4")
+
+pie(myData, myLabels, main="Title of my pie chart")
+
+
+
+
+```
 
 
 
